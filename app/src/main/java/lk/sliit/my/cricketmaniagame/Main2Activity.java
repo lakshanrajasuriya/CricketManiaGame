@@ -93,9 +93,49 @@ public class Main2Activity extends AppCompatActivity {
         B5.setText(teamB.players[4].getName()+": "+teamB.players[4].getScore());
 
 
-        //playGame();
+
 
     }
+
+    void playGame()
+    {
+
+        int totA=yourTeam.play();
+        int totB=teamB.play();
+
+        txtTotA.setText(yourTeam.getTeamName()+": "+totA);
+        txtTotB.setText(teamB.getTeamName()+": "+totB);
+        if(totA>totB)
+        {
+            txtWon.setVisibility(View.VISIBLE);
+            txtTotal.setText(yourTeam.getTeamName()+" won by "+(yourTeam.getTotal()-teamB.getTotal())+" runs");
+        }
+        else if(totA<totB)
+        {
+            txtTotal.setText(teamB.getTeamName()+" won by "+(teamB.getTotal()-yourTeam.getTotal())+" runs");
+            txtTotal.setTextColor(Color.parseColor(("#FF0000")));
+        }
+        else
+        {
+            txtTotal.setText("Draw");
+            txtTotal.setTextColor(Color.parseColor(("#FF6600")));
+        }
+
+        A1.setText(yourTeam.players[0].getName()+": "+yourTeam.players[0].getScore());
+        A2.setText(yourTeam.players[1].getName()+": "+yourTeam.players[1].getScore());
+        A3.setText(yourTeam.players[2].getName()+": "+yourTeam.players[2].getScore());
+        A4.setText(yourTeam.players[3].getName()+": "+yourTeam.players[3].getScore());
+        A5.setText(yourTeam.players[4].getName()+": "+yourTeam.players[4].getScore());
+
+
+        B1.setText(teamB.players[0].getName()+": "+teamB.players[0].getScore());
+        B2.setText(teamB.players[1].getName()+": "+teamB.players[1].getScore());
+        B3.setText(teamB.players[2].getName()+": "+teamB.players[2].getScore());
+        B4.setText(teamB.players[3].getName()+": "+teamB.players[3].getScore());
+        B5.setText(teamB.players[4].getName()+": "+teamB.players[4].getScore());
+
+    }
+
 
 
 
@@ -159,11 +199,33 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public void btnClickToss(View view) {
+        Random r=new Random();
+        int TA=r.nextInt(2);
+        int TB=r.nextInt(2);
+
+        while (TA==TB)
+        {
+            TA=r.nextInt(2);
+            TB=r.nextInt(2);
+        }
+
+        if(TA>TB)
+        {
+            txtTotal.setText(yourTeam.getTeamName()+" Won the Toss");
+        }
+        else
+        {
+            txtTotal.setText(teamB.getTeamName()+" Won the Toss");
+        }
+
+        BtnToss.setVisibility(View.INVISIBLE);
+        BtnPlay.setVisibility(View.VISIBLE);
+
 
     }
 
     public void btnClickPlay(View view) {
-        //playGame();
+        playGame();
         BtnPlay.setVisibility(View.INVISIBLE);
         BtnNew.setVisibility(View.VISIBLE);
     }
